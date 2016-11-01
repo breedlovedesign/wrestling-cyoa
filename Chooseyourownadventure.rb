@@ -179,6 +179,7 @@ end
 # user questions on and off.         #
 ######################################
 
+
 #get_user_input
 supply_user_input
 
@@ -286,18 +287,26 @@ knowaboutyourgimmickfacetnadebutbackstage.choices = [matchdebuttna, promodebuttn
  	def initialize chunks
  		@chunks = chunks
  	end
+
+	def label_to_mermaid_label chunk
+		chunk.label.gsub(/[\.,\,!]/,'').split(' ').join('_')
+	end
+
   def create_diagram_text
 	  puts
 		puts "Graph TD"
   	@chunks.each do |chunk|
 			# TODO talk about refactoring into smaller methods
-			puts chunk.label.gsub(/[\.,\,!]/,'').split(' ').join('_') + " --> " + (chunk.choices.collect { |c| c.label } ).inspect
+			label = self.label_to_mermaid_label chunk
+			puts  label + " --> " + (chunk.choices.collect { |c| label_to_mermaid_label c } ).inspect
 
   	end
   end
 
  end
 
-diagramer = DiagramMermaid.new [knowaboutyourgimmickfacetnadebutbackstage, promodebuttna, matchdebuttna, wwetag, tnatag, facewwedebut, heelwwedebut, facewwedebuttag, heelwwedebuttag, customcompany, customcompanytag, facecustomcompanydebut, heelcustomcompanydebut, heelindiesdebut, faceindiesdebut, faceindiesdebutinterviewA, faceindiesdebutinterviewB, faceindiesdebutinterview2A, faceindiesdebutinterview2B, royalrumblewwedebut1a, rawdebut1a, smackdownlivedebut1a, nxtdebut1a, nxtroyalrumblewwedebut1a, rawroyalrumblewwedebut, smackdownliveroyalrumblewwedebut, smackdownliveroyalrumblewwedebut2a, smackdownliveroyalrumblewwedebut2b, heelcustomcompany1A, heelcustomcompany1B, facecustomcompanydebut1A, facecustomcompanydebut1B, smackdownliveroyalrumblewwedebut3Romanreigns, smackdownliveroyalrumblewwedebut3Chrisjericho]
+
+
+diagramer = DiagramMermaid.new [dummy, start, big_leagues, indie, wwe, tna, heeltna, facetna, knowaboutyourgimmickfacetnadebutbackstage, promodebuttna, matchdebuttna, wwetag, tnatag, facewwedebut, heelwwedebut, facewwedebuttag, heelwwedebuttag, customcompany, customcompanytag, facecustomcompanydebut, heelcustomcompanydebut, heelindiesdebut, faceindiesdebut, faceindiesdebutinterviewA, faceindiesdebutinterviewB, faceindiesdebutinterview2A, faceindiesdebutinterview2B, royalrumblewwedebut1a, rawdebut1a, smackdownlivedebut1a, nxtdebut1a, nxtroyalrumblewwedebut1a, rawroyalrumblewwedebut, smackdownliveroyalrumblewwedebut, smackdownliveroyalrumblewwedebut2a, smackdownliveroyalrumblewwedebut2b, heelcustomcompany1A, heelcustomcompany1B, facecustomcompanydebut1A, facecustomcompanydebut1B, smackdownliveroyalrumblewwedebut3Romanreigns, smackdownliveroyalrumblewwedebut3Chrisjericho]
 
 diagramer.create_diagram_text
